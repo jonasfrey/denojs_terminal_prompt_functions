@@ -1,4 +1,4 @@
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Mar 08 2023 15:55:00 GMT+0100 (Central European Standard Time)","n_ts_created":1678287300793} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Mar 08 2023 16:32:57 GMT+0100 (Central European Standard Time)","n_ts_created":1678289577739} -->
 # prompt helper functions
 ## import ...
 ```javascript
@@ -76,5 +76,25 @@ console.log(a_o_person__selected_by_user)
 if(a_o_person__selected_by_user.includes(o_person__hans)){
     console.log("hurray hans was in your selection!")
 }
+
+```
+## example 4)
+pick an object by entering a string (number) 'n_id', with a default selection
+```javascript
+
+var a_o_person__selected_by_user = f_a_o__prompt_from_a_o(
+    a_o_person, 
+    new O_prompt_settings(
+        (o_person) => `${o_person.n_id}) ${o_person.s_name} ${(o_person == o_person__gabriel) ?'(default)': ''}`,
+        f_f_a_o_filtered__property_content_must_match(['s_name', 'n_id']), 
+        ',\n'
+    ), 
+    o_person__gabriel
+);
+console.log(a_o_person__selected_by_user)
+if(a_o_person__selected_by_user.includes(o_person__hans)){
+    console.log("hurray hans was in your selection!")
+}
+
 
 ```
