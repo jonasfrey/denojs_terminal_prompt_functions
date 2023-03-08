@@ -103,11 +103,16 @@ ${o_prompt_settings.s_select_option_message_suffix}`
         ){
         a_o_filtered = [o__default]
     }else{
-        var a_o_filtered = o_prompt_settings.f_a_o_filtered(
-            prompt_result,
-            a_o,
-            o_prompt_settings
-        );
+        if(prompt_result == null){
+            a_o_filtered = []
+        }else{
+
+            var a_o_filtered = o_prompt_settings.f_a_o_filtered(
+                prompt_result,
+                a_o,
+                o_prompt_settings
+                );
+        }
     }
 
     if(o_prompt_settings.b_require_valid_option){
