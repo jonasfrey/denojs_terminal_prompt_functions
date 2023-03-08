@@ -68,5 +68,23 @@ if(a_o_person__selected_by_user.includes(o_person__hans)){
     console.log("hurray hans was in your selection!")
 }
 
+//md: ## example 4)
+//md: pick an object by entering a string (number) 'n_id', with a default selection
+
+var a_o_person__selected_by_user = f_a_o__prompt_from_a_o(
+    a_o_person, 
+    new O_prompt_settings(
+        (o_person) => `${o_person.n_id}) ${o_person.s_name} ${(o_person == o_person__gabriel) ?'(default)': ''}`,
+        f_f_a_o_filtered__property_content_must_match(['s_name', 'n_id']), 
+        ',\n'
+    ), 
+    o_person__gabriel
+);
+console.log(a_o_person__selected_by_user)
+if(a_o_person__selected_by_user.includes(o_person__hans)){
+    console.log("hurray hans was in your selection!")
+}
+
+
 //./readme.md:end
 

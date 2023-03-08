@@ -78,7 +78,8 @@ let f_f_a_o_filtered__property_content_must_match = function(a_s_prop_name){
 
 let f_a_o__prompt_from_a_o = function(
     a_o, 
-    o_prompt_settings = false
+    o_prompt_settings = false, 
+    o__default
 ){  
     if(!o_prompt_settings){
         o_prompt_settings = f_o_prompt_settings__s_prop_name('n_id');
@@ -95,12 +96,19 @@ ${a_s_option.join(o_prompt_settings.s_join_string)}
 ]
 ${o_prompt_settings.s_select_option_message_suffix}`
     );
-
-    var a_o_filtered = o_prompt_settings.f_a_o_filtered(
-        prompt_result,
-        a_o,
-        o_prompt_settings
-    );
+    if(
+        prompt_result == null
+        && 
+        o__default
+        ){
+        a_o_filtered = [o__default]
+    }else{
+        var a_o_filtered = o_prompt_settings.f_a_o_filtered(
+            prompt_result,
+            a_o,
+            o_prompt_settings
+        );
+    }
 
     if(o_prompt_settings.b_require_valid_option){
         if(a_o_filtered.length == 0){
