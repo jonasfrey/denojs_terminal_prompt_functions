@@ -1,11 +1,12 @@
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Mar 08 2023 16:32:57 GMT+0100 (Central European Standard Time)","n_ts_created":1678289577739} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Nov 22 2023 12:37:10 GMT+0100 (Central European Standard Time)","n_ts_created":1700653030750} -->
 # prompt helper functions
 ## import ...
 ```javascript
 import {
     f_a_o__prompt_from_a_o,
     O_prompt_settings, 
-    f_f_a_o_filtered__property_content_must_match
+    f_f_a_o_filtered__property_content_must_match,
+    f_a_v__prompt
 } from "./mod.module.js"
 ```
 ## let the user pick an object from an array
@@ -26,6 +27,40 @@ let a_o_person = [
     o_person__gabriel,
     o_person__judith,
 ];
+// ## select an option, 
+//  let f_a_v__prompt = function(
+//      a_v,
+//      f_s,
+//      f_a_v, 
+//      v_default, 
+//      f_s_invalid_input = (s_prompt_input)=>''
+//  ){ 
+let a_o_person_selected = f_a_v__prompt(
+    a_o_person,
+    (a_v)=>{
+        return a_v.map(
+            (o,n_idx)=>{return `${n_idx}: ${o.s_name}`}
+        ).join('\n')
+    },
+    (a_v, s_prompt_input)=>{
+        if(s_prompt_input == 'all'){return a_v}
+        return a_v.filter(
+            (v, n_idx)=>{
+                function isNumeric(value) {
+                    return /^-?\d+$/.test(value);
+                }
+                if(isNumeric(s_prompt_input)){
+                    return parseInt(s_prompt_input)== n_idx
+                }
+                return v.s_name.toLowerCase() == (s_prompt_input.toLowerCase())
+            }
+        )
+    }, 
+    o_person__berta,
+    (s)=>`'${s}' invalid input`
+);
+console.log(`you have selected ${JSON.stringify(a_o_person_selected)}`)
+
 ```
 ## example 1)
 pick an object by entering a string wich matches 's_name'

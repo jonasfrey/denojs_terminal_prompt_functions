@@ -1,3 +1,35 @@
+let f_a_v__prompt = function(
+    a_v,
+    f_s,
+    f_a_v, 
+    v_default, 
+    f_s_invalid_input = (s_prompt_input)=>''
+){
+    let a_v_selected = []
+    while(a_v_selected.length == 0){
+
+        let s = prompt(
+            [
+                f_s(a_v),
+                (v_default) ? `default [${f_s([v_default])}]` : ''
+            ].join('\n')+'\n'
+        ) ;
+        a_v_selected = f_a_v(a_v, s);
+        // console.log(a_v_selected)
+        if(v_default !== undefined && s.trim() == ''){
+            a_v_selected = [v_default]
+        }
+        if(a_v_selected.length == 0 && typeof f_s_invalid_input == 'function'){
+            console.log(
+                f_s_invalid_input(s)
+            )
+        }
+    }
+    return a_v_selected
+
+}
+
+
 class O_prompt_settings{
     constructor(
         f_s__callback = (o) => `${JSON.stringify(o)}`, 
@@ -43,7 +75,10 @@ class O_prompt_settings{
     }
 }
 
-let f_f_a_o_filtered__property_content_must_match = function(a_s_prop_name){
+let f_f_a_o_filtered__property_content_must_match = function(
+    a_s_prop_name, 
+    b_match_array_index = false,
+){
     if(typeof a_s_prop_name == 'string'){
         a_s_prop_name = [a_s_prop_name]
     }
@@ -145,7 +180,8 @@ ${o_prompt_settings.s_select_option_message_suffix}`
 export {
     f_a_o__prompt_from_a_o, 
     O_prompt_settings, 
-    f_f_a_o_filtered__property_content_must_match
+    f_f_a_o_filtered__property_content_must_match, 
+    f_a_v__prompt
     // f_o_option__prompt, 
     // O_option
 }
